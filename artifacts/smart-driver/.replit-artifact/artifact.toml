@@ -1,0 +1,24 @@
+kind = "mobile"
+previewPath = "/"
+title = "Rydexo — Smart Driving Companion"
+description = "A premium smart driving companion mobile app for iOS and Android. Features a GPS speedometer, HUD mode, live map, trip tracking with driving analytics, fuel/cost tracking, vehicle management, AI-powered trip insights, driving score, and maintenance reminders. Designed for safe, glanceable use while driving with a premium dark interface."
+version = "1.0.0"
+id = "artifacts/smart-driver"
+router = "expo-domain"
+
+[[services]]
+name = "expo"
+ensurePreviewReachable = "/status"
+paths = [ "/" ]
+localPort = 19381
+
+[services.development]
+run = "pnpm --filter @workspace/smart-driver run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/smart-driver", "run", "build" ]
+run = [ "pnpm", "--filter", "@workspace/smart-driver", "run", "serve" ]
+
+[services.env]
+PORT = "19381"
+BASE_PATH = "/"

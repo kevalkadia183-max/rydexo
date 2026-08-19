@@ -1,0 +1,58 @@
+{
+  "expo": {
+    "name": "Rydexo",
+    "slug": "smart-driver",
+    "version": "1.0.0",
+    "orientation": "default",
+    "icon": "./assets/images/icon.png",
+    "scheme": "smart-driver",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "ios": {
+      "bundleIdentifier": "com.velotrack.app",
+      "supportsTablet": false,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Rydexo needs your location to measure speed, track your route, and record trip distance.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Rydexo needs background location to continue tracking your trip when the app is minimized.",
+        "NSMotionUsageDescription": "Rydexo uses motion data to detect driving events like hard braking and sharp turns."
+      }
+    },
+    "android": {
+      "package": "com.velotrack.app",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/images/icon.png"
+    },
+    "plugins": [
+      [
+        "expo-router",
+        {
+          "origin": "https://replit.com/"
+        }
+      ],
+      "expo-font",
+      "expo-web-browser",
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Rydexo needs your location to measure speed and track trips.",
+          "locationWhenInUsePermission": "Rydexo needs your location to measure speed and track trips."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
+}

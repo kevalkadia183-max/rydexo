@@ -1,0 +1,1079 @@
+ADD MULTI-STYLE SPEEDOMETER + INTELLIGENT SPEED WARNING SYSTEM
+
+Implement this feature in the existing Smart Driving Companion app.
+
+IMPORTANT:
+Do NOT remove or break the existing GPS, trip tracking, map, HUD, vehicle, analytics, or other functionality.
+
+The uploaded reference image is a design/feature reference only. Do NOT copy its branding, exact graphics, name, assets, or proprietary UI. Create our own original designs.
+
+The goal is to make our speedometer system significantly better by supporting MULTIPLE SPEEDOMETER STYLES and an intelligent speed-warning system.
+
+==================================================
+
+1. SPEEDOMETER STYLE SELECTOR
+    ==================================================
+
+Add:
+
+Settings → Driving Display → Speedometer Style
+
+Allow the user to select from multiple original designs.
+
+At minimum create these styles:
+
+STYLE 1 — DIGITAL MINIMAL
+
+Large digital number:
+
+72
+
+KM/H
+
+Below:
+
+LIMIT 60
+
+AVG 54
+MAX 82
+
+Very clean, modern design.
+
+⸻
+
+STYLE 2 — CIRCULAR GAUGE
+
+Create a circular/semicircular automotive-style gauge inspired by the general concept shown in the reference image.
+
+Display:
+
+Current speed in the center.
+
+Example:
+
+72
+
+KM/H
+
+Around it:
+
+0
+20
+40
+60
+80
+100
+120
+140
+160
+180
+200
+220
+240
+
+The gauge needle/indicator should move smoothly according to GPS speed.
+
+Use different visual states:
+
+Normal
+Caution
+Over limit
+
+The exact colors and graphics must be original.
+
+⸻
+
+STYLE 3 — SPORT GAUGE
+
+Create a premium performance-inspired gauge.
+
+Features:
+
+Large central speed
+Animated needle
+RPM-style visual treatment WITHOUT pretending we have actual engine RPM
+Maximum speed scale
+Current speed
+Speed limit
+
+Do not display fake RPM data.
+
+⸻
+
+STYLE 4 — MINIMAL RING
+
+Large circular ring around the speed.
+
+Example:
+
+   72
+  KM/H
+
+LIMIT 60
+
+The ring progressively fills based on speed.
+
+⸻
+
+STYLE 5 — DIGITAL SEGMENT
+
+Create a classic digital dashboard appearance using large segmented-style digits.
+
+Example:
+
+072
+KM/H
+
+LIMIT 60
+
+This should work particularly well in night/HUD mode.
+
+⸻
+
+STYLE 6 — PREMIUM DASHBOARD
+
+Create a modern automotive dashboard.
+
+Example:
+
+┌─────────────────────────┐
+│                         │
+│          72             │
+│         KM/H            │
+│                         │
+│      LIMIT 60           │
+│                         │
+│ AVG 54      MAX 82      │
+│                         │
+│  12.4 km     18 min     │
+└─────────────────────────┘
+
+Make this look premium and minimal.
+
+==================================================
+2. SPEEDOMETER CUSTOMIZATION
+
+Allow users to customize:
+
+Speedometer style
+Unit
+KM/H
+MPH
+Knots
+
+Gauge maximum:
+
+Auto
+120
+160
+200
+240
+300
+
+Font/display size:
+
+Small
+Medium
+Large
+
+Show/hide:
+
+Average speed
+Maximum speed
+Trip distance
+Trip time
+Speed limit
+GPS accuracy
+Heading
+Altitude
+
+Do not overcrowd the main driving screen.
+
+==================================================
+3. SPEEDOMETER COLOR STATES
+
+The speedometer should visually react to the current driving state.
+
+NORMAL:
+
+Normal neutral appearance.
+
+APPROACHING LIMIT:
+
+Subtle caution indication when approaching the configured warning threshold.
+
+OVER LIMIT:
+
+Strong visual warning.
+
+Example:
+
+72 KM/H
+
+LIMIT 60
+
+SLOW DOWN
+
+Do not rely only on color.
+
+Use:
+
+Color
+Icon
+Text
+Optional animation
+
+The warning should remain readable for users with color-vision deficiencies.
+
+==================================================
+4. SPEED LIMIT CONFIGURATION
+
+Create:
+
+Settings → Speed Alerts
+
+Allow:
+
+Speed limit source:
+
+Automatic
+Manual
+
+Manual speed limit:
+
+20
+30
+40
+50
+60
+70
+80
+90
+100
+110
+120
+130
+140
+150
+No limit
+Custom
+
+Allow custom limits.
+
+Example:
+
+User selects:
+
+60 KM/H
+
+The app treats 60 km/h as the configured limit.
+
+==================================================
+5. WARNING THRESHOLD
+
+Allow users to configure when the warning starts.
+
+Options:
+
+Warn at speed limit
+
+Warn 5 km/h before limit
+
+Warn 10 km/h before limit
+
+Warn 5 mph before limit
+
+Warn 10 mph before limit
+
+Custom threshold
+
+Example:
+
+Limit = 60 km/h
+
+Warning threshold = 55 km/h
+
+At 55:
+
+CAUTION
+
+At 60+:
+
+SLOW DOWN
+
+==================================================
+6. INTELLIGENT SPEED WARNING
+
+Implement a reliable speed-warning state machine.
+
+States:
+
+NORMAL
+APPROACHING_LIMIT
+OVER_LIMIT
+SEVERE_OVER_LIMIT
+
+Example:
+
+Limit = 60
+
+0–54:
+
+NORMAL
+
+55–59:
+
+APPROACHING LIMIT
+
+60–69:
+
+OVER LIMIT
+
+70+:
+
+SEVERE OVER LIMIT
+
+Make thresholds configurable.
+
+Do not trigger alerts from a single noisy GPS reading.
+
+Use a short confirmation window / smoothing mechanism before changing alert state.
+
+==================================================
+7. WARNING SOUND
+
+Add audible speed warnings.
+
+Settings:
+
+Speed warning sound:
+
+ON/OFF
+
+Sound type:
+
+Short beep
+Double beep
+Voice warning
+Subtle alert
+Strong alert
+
+Default should be a clear but non-aggressive alert.
+
+Example:
+
+At speed limit:
+
+Beep
+
+If the driver remains significantly over the limit:
+
+Repeat warning after a reasonable cooldown.
+
+DO NOT play a sound on every GPS update.
+
+Implement an alert cooldown.
+
+Example:
+
+Initial warning:
+play sound
+
+Wait several seconds.
+
+If still significantly over limit:
+play reminder.
+
+If speed falls below the warning threshold:
+reset alert state.
+
+If speed later exceeds the threshold again:
+allow a new warning.
+
+==================================================
+8. VOICE WARNING
+
+Support optional spoken alerts.
+
+Examples:
+
+“Speed limit reached.”
+
+“Please slow down.”
+
+“You’re above the speed limit.”
+
+“Slow down. Speed limit is 60 kilometers per hour.”
+
+Do not make voice alerts overly frequent.
+
+Allow the user to disable voice warnings.
+
+==================================================
+9. ESCALATING WARNING
+
+Create three warning levels.
+
+LEVEL 1 — CAUTION
+
+User approaches limit.
+
+Example:
+
+“Approaching speed limit.”
+
+Use subtle visual/audio indication.
+
+⸻
+
+LEVEL 2 — WARNING
+
+User exceeds limit.
+
+Example:
+
+“Speed limit exceeded. Please slow down.”
+
+Use stronger visual warning and optional sound.
+
+⸻
+
+LEVEL 3 — SEVERE
+
+User remains significantly above the configured limit.
+
+Example:
+
+“SLOW DOWN.”
+
+Use stronger but controlled warning.
+
+Do not create dangerous or distracting flashing effects.
+
+==================================================
+10. IMPORTANT GPS RELIABILITY RULE
+
+Never trigger a strong warning from unreliable GPS data.
+
+Before issuing a warning:
+
+Check:
+
+GPS accuracy
+Speed confidence
+Recent location updates
+Speed smoothing
+
+If GPS accuracy is poor:
+
+Show:
+
+GPS SIGNAL WEAK
+
+and avoid making strong speed-limit claims.
+
+Never fabricate speed.
+
+==================================================
+11. SPEED SMOOTHING
+
+GPS speed can jump unexpectedly.
+
+Implement smoothing/filtering.
+
+Example:
+
+Actual readings:
+
+57
+61
+58
+63
+59
+62
+
+Do not make the displayed speed rapidly jump between values.
+
+Use an appropriate smoothing/filtering algorithm while keeping the display responsive.
+
+Do not introduce excessive delay.
+
+The speedometer should feel real-time.
+
+==================================================
+12. SPEED ALERT RESET
+
+When the driver slows below the configured reset threshold:
+
+Reset the warning state.
+
+Example:
+
+Limit = 60
+
+Driver reaches 65:
+
+WARNING
+
+Driver slows to 57:
+
+Return to NORMAL.
+
+If driver later reaches 61:
+
+Trigger a new warning.
+
+Do not continuously repeat alerts while the driver remains in the same state.
+
+==================================================
+13. BACKGROUND WARNING
+
+If the user starts a trip and locks the phone or places the app in the background:
+
+Where permitted by iOS/Android:
+
+Continue location tracking and speed alerts.
+
+Follow all platform background-location rules.
+
+Do not attempt to bypass OS restrictions.
+
+If background audio/notifications require additional permissions:
+
+Request them properly.
+
+==================================================
+14. LOCK SCREEN / AUDIO BEHAVIOR
+
+When possible through supported platform APIs:
+
+Allow the user to receive speed-warning audio even when the display is not actively visible.
+
+Do not claim functionality that the OS does not permit.
+
+Test on real devices.
+
+==================================================
+15. HUD MODE
+
+All speedometer styles should support HUD where technically appropriate.
+
+HUD options:
+
+Mirror OFF
+Mirror ON
+
+Large speed.
+
+Example:
+
+   72
+  KM/H
+ LIMIT 60
+
+HUD should prioritize:
+
+Speed
+Unit
+Speed limit
+Warning state
+
+Do not display unnecessary information.
+
+==================================================
+16. LANDSCAPE MODE
+
+Optimize all speedometer styles for landscape.
+
+Especially:
+
+Circular Gauge
+Sport Gauge
+Premium Dashboard
+Digital Segment
+
+Make the speed number large and centered.
+
+==================================================
+17. NIGHT MODE
+
+Create:
+
+DAY
+NIGHT
+AUTO
+
+Night mode should reduce unnecessary brightness.
+
+Use high-contrast typography.
+
+Avoid overly bright UI elements.
+
+==================================================
+18. SPEEDOMETER STYLE PREVIEW
+
+In:
+
+Settings → Driving Display → Speedometer Style
+
+Show live previews.
+
+The preview should use simulated data:
+
+72 KM/H
+LIMIT 60
+
+But clearly indicate that it is a preview.
+
+When the user selects a style:
+
+Save the preference.
+
+The selected style should immediately become the active driving display.
+
+==================================================
+19. QUICK STYLE SWITCHING
+
+During a trip, do NOT force users into Settings.
+
+Provide an optional safe quick-access mechanism.
+
+For example:
+
+Swipe left/right on the speedometer.
+
+OR
+
+A small display/settings button.
+
+The interaction must be simple and should not encourage prolonged phone interaction while driving.
+
+==================================================
+20. SPEED LIMIT DATA SOURCE
+
+Maintain the existing speed-limit provider architecture.
+
+If automatic road speed-limit data is available:
+
+Use it.
+
+If unavailable:
+
+Show:
+
+LIMIT UNKNOWN
+
+Do NOT invent a speed limit based purely on assumptions.
+
+Manual speed limits must always remain available.
+
+Clearly distinguish:
+
+DETECTED
+MANUAL
+UNKNOWN
+
+==================================================
+21. DRIVING SAFETY
+
+This feature is intended to warn the driver.
+
+The application must NEVER:
+
+Control the vehicle
+Control acceleration
+Control brakes
+Change vehicle settings
+Attempt to physically slow the vehicle
+
+The app can only provide:
+
+Visual warnings
+Audio warnings
+Voice warnings
+Haptic warnings where supported
+
+Always use wording such as:
+
+“Please slow down.”
+
+Never imply that the app can automatically control the vehicle.
+
+==================================================
+22. SETTINGS
+
+Add:
+
+Settings
+→ Driving
+→ Speed Alerts
+
+Include:
+
+Speed warnings: ON/OFF
+
+Warning sound: ON/OFF
+
+Voice warnings: ON/OFF
+
+Haptic warning: ON/OFF
+
+Warning threshold
+
+Warning severity
+
+Sound type
+
+Voice language where supported
+
+Alert volume behavior
+
+Approaching-limit warning
+
+Severe-speed warning
+
+Background alerts where supported
+
+==================================================
+23. AUDIO CONTROL
+
+Do not unexpectedly take over the user’s media experience.
+
+Follow iOS and Android audio-session rules.
+
+If possible:
+
+Duck music volume temporarily during a warning.
+
+Then restore it.
+
+Respect:
+
+Silent mode
+Do Not Disturb
+System volume
+Audio-session restrictions
+
+Follow platform policies.
+
+==================================================
+24. HAPTIC ALERT
+
+Where supported:
+
+Approaching limit:
+
+Light haptic.
+
+Over limit:
+
+Stronger haptic.
+
+Severe:
+
+Distinct warning pattern.
+
+Allow the user to disable haptic alerts.
+
+==================================================
+25. TRIP RECORDING INTEGRATION
+
+Speedometer data must integrate with the existing trip engine.
+
+Record:
+
+Current speed
+Speed-limit state
+Speeding events
+Warning events
+Timestamp
+Location
+
+Trip history should be able to show:
+
+Total speeding events
+Duration above limit
+Maximum speed
+Average speed
+Warning count
+
+==================================================
+26. TRIP SUMMARY
+
+After the trip show:
+
+MAX SPEED
+AVERAGE SPEED
+DISTANCE
+TIME
+
+Then:
+
+SPEED LIMIT EVENTS
+
+Example:
+
+3 warnings
+2 severe warnings
+4 min above limit
+
+Also show a route/timeline where appropriate.
+
+==================================================
+27. ANALYTICS
+
+Add to the existing Insights system:
+
+Speed-limit compliance:
+
+95%
+
+Total speeding events:
+
+7
+
+Average time above limit:
+
+18 seconds
+
+Longest speeding event:
+
+42 seconds
+
+Most common speeding range:
+
++5 to +10 km/h
+
+Do not encourage speeding or present higher speed as a positive achievement.
+
+==================================================
+28. DRIVING SCORE INTEGRATION
+
+Speed-limit compliance should contribute to the driving score.
+
+However:
+
+Do not make speeding a game.
+
+Do NOT give badges such as:
+
+“Fastest driver”
+
+“Top speed”
+
+or anything that encourages dangerous driving.
+
+Instead use safety-oriented achievements such as:
+
+“Safe driving streak”
+
+“Smooth driving”
+
+“Consistent speed”
+
+==================================================
+29. ACCESSIBILITY
+
+Warnings must not rely only on color.
+
+Example:
+
+NORMAL:
+Normal display
+
+CAUTION:
+⚠ Approaching speed limit
+
+WARNING:
+⚠ Speed limit exceeded
+
+SEVERE:
+⚠ SLOW DOWN
+
+Use large readable text.
+
+Support accessibility settings where practical.
+
+==================================================
+30. PERFORMANCE
+
+The speedometer must update smoothly.
+
+Do not cause:
+
+UI lag
+Excessive battery usage
+Memory leaks
+High CPU usage
+
+Separate:
+
+GPS processing
+Speed calculation
+Warning engine
+Audio engine
+UI rendering
+
+Do not put all logic into one screen component.
+
+Recommended architecture:
+
+LocationService
+SpeedCalculationService
+SpeedLimitService
+SpeedWarningService
+AudioAlertService
+HapticService
+SpeedometerRenderer
+TripService
+
+==================================================
+31. TESTING
+
+Create automated tests for:
+
+Unit conversion
+
+Speed smoothing
+
+Speed-limit detection
+
+Warning thresholds
+
+Alert cooldown
+
+Warning reset
+
+Severe warning
+
+GPS accuracy handling
+
+Trip speed events
+
+Driving score integration
+
+Test examples:
+
+Limit = 60
+Speed = 50
+Expected = NORMAL
+
+Limit = 60
+Speed = 57
+Expected = APPROACHING
+
+Limit = 60
+Speed = 61
+Expected = OVER_LIMIT
+
+Limit = 60
+Speed = 75
+Expected = SEVERE
+
+Then:
+
+75 → 57
+
+Expected:
+
+Warning state resets.
+
+==================================================
+32. PHYSICAL DEVICE TESTING
+
+Do not consider this feature complete based only on simulator testing.
+
+Test on real:
+
+iPhone
+
+Android phone
+
+Verify:
+
+GPS speed
+Background tracking
+Screen lock
+Audio alerts
+Haptic alerts
+HUD
+Landscape
+Night mode
+Battery usage
+Permission behavior
+
+==================================================
+33. UI QUALITY
+
+The reference screenshot demonstrates the usefulness of a large automotive-style gauge.
+
+Our version should feel substantially more modern.
+
+Create original visual designs with:
+
+Premium typography
+Smooth gauge animation
+Subtle gradients
+Clean markings
+Modern spacing
+High contrast
+Responsive layouts
+
+Do not copy the exact gauge artwork from the reference.
+
+==================================================
+34. IMPLEMENTATION ORDER
+
+Implement in this order:
+
+1. Speedometer style architecture
+2. Digital style
+3. Circular gauge
+4. Sport gauge
+5. Ring gauge
+6. Digital segment style
+7. Premium dashboard
+8. Style selector
+9. Speed-limit state machine
+10. Audio warning
+11. Voice warning
+12. Haptic warning
+13. Alert cooldown
+14. GPS confidence filtering
+15. Background alerts
+16. Trip integration
+17. Settings
+18. Testing
+19. Physical-device verification
+
+==================================================
+35. IMPORTANT
+
+Do not create fake GPS data in the production speedometer.
+
+Do not hardcode the displayed speed.
+
+Do not claim automatic speed-limit detection works until the required provider/API is actually configured.
+
+Do not play warning sounds repeatedly.
+
+Do not create distracting animations.
+
+Do not attempt to control the vehicle.
+
+Do not break existing features.
+
+After implementation, report:
+
+1. Which speedometer styles were implemented
+2. Which warning modes work
+3. Which audio modes work
+4. Which voice modes work
+5. Whether background warnings work on iOS
+6. Whether background warnings work on Android
+7. Which permissions are required
+8. Which external APIs are required
+9. What was tested on a physical device
+10. Any platform limitations
+
+The final result must be a genuinely functional multi-style GPS speedometer and intelligent driver-warning system, not a visual mockup.

@@ -1,0 +1,5 @@
+- [Cloud sync architecture](cloud-sync-arch.md) — offline-first sync: write local first, then push; CloudSyncManager refreshes contexts after fullSync on sign-in transition.
+- [API server auth security](api-jwt-secret.md) — SESSION_SECRET must be set; production throws on missing; dev uses random per-process bytes.
+- [Drizzle composite PK ownership](drizzle-composite-pk.md) — scope user-owned records with composite PK (id, userId) so upserts cannot cross user boundaries.
+- [Rydexo brand direction](rydexo-brand.md) — OLED black + cyan #00E5FF + Space Grotesk; storage keys stay velotrack:* on purpose; warning color escalation is safety-critical.
+- [Subagent node_modules corruption](subagent-node-modules.md) — if typecheck breaks on package exports after a subagent ran, reinstall the package; subagents may hand-edit node_modules .d.ts.

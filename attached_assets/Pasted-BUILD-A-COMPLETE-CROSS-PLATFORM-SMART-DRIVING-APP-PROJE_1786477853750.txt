@@ -1,0 +1,1635 @@
+BUILD A COMPLETE CROSS-PLATFORM SMART DRIVING APP
+
+PROJECT TYPE:
+Mobile application for iOS and Android.
+
+PRODUCT CONCEPT:
+Build a modern "Smart Driving Companion" inspired by the general category of GPS speedometer / HUD / trip tracker applications.
+
+IMPORTANT:
+The uploaded reference screenshot is only a functional/design reference for understanding the type of application we want to build. DO NOT copy its branding, name, logo, proprietary graphics, screenshots, exact UI, or copyrighted visual assets.
+
+We want our own original product with a modern 2026-quality interface and significantly more useful functionality.
+
+The application should combine:
+
+1. GPS Speedometer
+2. Speed-limit awareness
+3. Full-screen driving mode
+4. HUD mode
+5. Live map
+6. Trip tracking
+7. Trip history
+8. Fuel/cost tracking
+9. Vehicle management
+10. Driving analytics
+11. Safety features
+12. Parking location
+13. AI-powered trip insights
+14. Maintenance reminders
+15. Future wearable / CarPlay / Android Auto support
+
+The application must be designed mobile-first and optimized for safe, glanceable use while driving.
+
+==================================================
+1. PRODUCT PRINCIPLES
+==================================================
+
+The app must feel like a premium driving utility, not an old-fashioned speedometer.
+
+Design goals:
+
+- Extremely simple
+- Fast
+- Modern
+- Premium
+- High contrast
+- Easy to understand at a glance
+- Large touch targets
+- Minimal interaction while driving
+- Dark driving interface
+- Smooth animations
+- Excellent performance
+- Reliable GPS tracking
+- Battery-conscious background operation
+
+Never create a complicated dashboard full of tiny controls.
+
+During driving, the user's attention should remain on the road.
+
+Avoid unnecessary animations or distracting elements.
+
+==================================================
+2. PLATFORM
+==================================================
+
+Build for:
+
+- iOS
+- Android
+
+Prefer a cross-platform architecture where practical.
+
+Recommended stack:
+
+- React Native + Expo if the required background GPS, sensors and native functionality can be implemented reliably.
+- If Expo limitations prevent reliable production functionality, use React Native with the required native modules/configuration.
+- TypeScript throughout.
+- Clean modular architecture.
+
+Do NOT choose technology merely because it is easiest for a prototype.
+
+The final architecture must support:
+
+- GPS
+- background location
+- motion sensors
+- notifications
+- local storage
+- cloud synchronization
+- maps
+- permissions
+- subscription functionality
+- future Apple Watch / Android wearable support
+- future CarPlay / Android Auto integration where platform eligibility allows it.
+
+==================================================
+3. APP STRUCTURE
+==================================================
+
+Main navigation:
+
+HOME
+DRIVE
+TRIPS
+INSIGHTS
+VEHICLES
+SETTINGS
+
+Optional prominent emergency action:
+
+SOS
+
+The primary user journey must be:
+
+Open app
+→ see current status
+→ tap START DRIVE
+→ driving dashboard
+→ stop trip
+→ trip summary
+→ insights
+
+==================================================
+4. ONBOARDING
+==================================================
+
+Create a beautiful onboarding flow.
+
+Screen 1:
+
+"Your smarter driving companion"
+
+Explain:
+
+Track speed
+Track trips
+Understand driving
+Monitor fuel
+Stay aware of speed limits
+
+Screen 2:
+
+Location permission
+
+Clearly explain why location is required.
+
+Screen 3:
+
+Motion/sensor permission if required.
+
+Screen 4:
+
+Notification permission.
+
+Screen 5:
+
+Create first vehicle.
+
+Fields:
+
+Vehicle name
+Example: My Car
+
+Vehicle type:
+
+Car
+Motorcycle
+SUV
+Van
+Truck
+Other
+
+Fuel:
+
+Petrol
+Diesel
+Electric
+Hybrid
+Other
+
+Optional:
+
+Fuel efficiency
+Fuel price
+
+Allow the user to skip vehicle setup and configure it later.
+
+==================================================
+5. HOME SCREEN
+==================================================
+
+Create a clean home dashboard.
+
+Show:
+
+Current vehicle
+
+Today's driving:
+
+Distance
+Driving time
+Trips
+
+Quick actions:
+
+START DRIVE
+MY TRIPS
+VEHICLES
+
+Also show a small driving summary:
+
+Today's distance
+Today's fuel estimate
+Today's driving score
+
+If no trip exists:
+
+"Ready for your next drive?"
+
+Large START DRIVE button.
+
+==================================================
+6. LIVE DRIVING DASHBOARD
+==================================================
+
+This is the most important screen.
+
+Create a dedicated driving interface.
+
+The default view should contain:
+
+CURRENT SPEED
+
+Example:
+
+72
+
+KM/H
+
+Below:
+
+LIMIT 60
+
+If speed exceeds the detected/known limit:
+
+RED warning state.
+
+Example:
+
+72 KM/H
+
+LIMIT 60
+
+SLOW DOWN
+
+Use visual and optional audio/haptic alerts.
+
+The speed must be extremely large and readable.
+
+Also show:
+
+Average speed
+Maximum speed
+Distance
+Trip duration
+
+Allow the user to switch between:
+
+SPEED
+MAP
+COMBINED
+
+Do not make the user navigate complicated menus while driving.
+
+==================================================
+7. SPEED UNITS
+==================================================
+
+Support:
+
+KM/H
+MPH
+KNOTS
+
+Allow user to select preferred unit.
+
+Convert all values correctly.
+
+Do not hardcode units.
+
+==================================================
+8. GPS SPEED
+==================================================
+
+Use the device GPS/location system to calculate speed.
+
+Requirements:
+
+- Smooth speed updates
+- Filter GPS noise
+- Avoid unrealistic speed jumps
+- Handle poor GPS signal
+- Display GPS accuracy/status
+- Gracefully handle no GPS signal
+
+If GPS accuracy is poor:
+
+Show a subtle indicator.
+
+Example:
+
+GPS WEAK
+
+Never present unreliable data as highly accurate.
+
+==================================================
+9. SPEED LIMIT SYSTEM
+==================================================
+
+Create a speed-limit system with these states:
+
+LIMIT AVAILABLE
+LIMIT UNKNOWN
+LIMIT ESTIMATED
+
+If a reliable speed-limit data source is integrated, use it.
+
+If no speed-limit data is available:
+
+Display:
+
+SPEED LIMIT
+UNKNOWN
+
+Do NOT invent a speed limit.
+
+Also support manual speed-limit presets.
+
+Example:
+
+20
+30
+40
+50
+60
+80
+100
+120
+NO LIMIT
+
+User can configure warning threshold.
+
+Examples:
+
+Alert immediately
+Alert at +5 km/h
+Alert at +10 km/h
+
+==================================================
+10. SPEED ALERT
+==================================================
+
+When user exceeds the configured limit:
+
+Visual alert.
+
+Optional:
+
+Audio alert
+Haptic alert
+
+The alert should not continuously annoy the driver.
+
+Implement intelligent cooldown behavior.
+
+Example:
+
+Alert once when crossing threshold.
+
+Do not repeatedly alert every GPS update.
+
+Alert again only after speed drops below threshold and exceeds it again.
+
+Allow the user to configure alert behavior.
+
+==================================================
+11. HUD MODE
+==================================================
+
+Create a dedicated HUD mode.
+
+The screen must display:
+
+Large speed
+
+KM/H or MPH
+
+Speed limit
+
+Optional trip information
+
+HUD must support mirrored text.
+
+Provide:
+
+NORMAL
+MIRROR
+
+mode.
+
+The interface should be extremely simple.
+
+Example:
+
+72
+
+KM/H
+
+LIMIT 60
+
+HUD mode should use high contrast and large typography.
+
+==================================================
+12. MAP MODE
+==================================================
+
+Create full-screen live map mode.
+
+Show:
+
+Current location
+Current route
+Trip trail
+Current speed
+Optional speed limit
+
+Provide map controls without clutter.
+
+The map must automatically follow the vehicle when appropriate.
+
+Do not build a complete navigation system unless routing/navigation APIs are actually configured.
+
+If routing is not implemented, clearly label the map as tracking rather than navigation.
+
+==================================================
+13. COMBINED MODE
+==================================================
+
+Create:
+
+Top:
+
+72 KM/H
+
+Middle:
+
+Live map
+
+Bottom:
+
+Distance
+Duration
+Average speed
+
+This should be the premium default driving dashboard.
+
+==================================================
+14. TRIP TRACKING
+==================================================
+
+When user taps START DRIVE:
+
+Create a trip.
+
+Record:
+
+Trip ID
+Vehicle
+Start time
+End time
+Start location
+End location
+GPS points
+Distance
+Duration
+Average speed
+Maximum speed
+Speed events
+Estimated fuel consumption
+Estimated fuel cost
+Driving events
+
+Store data efficiently.
+
+Do not store excessive GPS points unnecessarily.
+
+Use sensible sampling and distance/time thresholds.
+
+==================================================
+15. PAUSE / RESUME
+==================================================
+
+During a trip:
+
+PAUSE
+RESUME
+END TRIP
+
+If GPS temporarily disappears:
+
+Do not automatically destroy the trip.
+
+Mark GPS interruption internally.
+
+When GPS returns:
+
+Continue tracking.
+
+==================================================
+16. TRIP SUMMARY
+==================================================
+
+After END TRIP:
+
+Show a beautiful summary.
+
+Example:
+
+YOUR DRIVE
+
+24.8 km
+
+42 min
+
+52 km/h average
+
+87 km/h maximum
+
+Estimated fuel:
+1.7 L
+
+Estimated cost:
+₹178
+
+Driving score:
+91 / 100
+
+Then show:
+
+Speed events
+Hard braking events
+Hard acceleration events
+Sharp turns
+Idle time
+
+Also show the route on a map.
+
+==================================================
+17. TRIP HISTORY
+==================================================
+
+TRIPS screen:
+
+List all previous trips.
+
+Each card:
+
+Date
+Vehicle
+Distance
+Duration
+Average speed
+Driving score
+
+Example:
+
+TODAY
+
+Home → Office
+
+24.8 km
+42 min
+91 score
+
+Allow:
+
+Tap → Trip details
+Delete
+Share/export
+
+==================================================
+18. TRIP DETAILS
+==================================================
+
+Detailed trip page.
+
+Sections:
+
+SUMMARY
+MAP
+SPEED
+EVENTS
+FUEL
+AI INSIGHTS
+
+Show:
+
+Route map
+
+Speed graph
+
+Timeline
+
+Example:
+
+09:12 Started
+09:18 Sharp turn
+09:23 Speed limit exceeded
+09:31 Rapid acceleration
+09:42 Hard braking
+09:54 Arrived
+
+==================================================
+19. DRIVING EVENT DETECTION
+==================================================
+
+Use GPS and device motion sensors where technically reliable.
+
+Potential events:
+
+- Hard braking
+- Rapid acceleration
+- Sharp turn
+- Excessive speeding
+- Extended idling
+
+Do not claim that these measurements are equivalent to professional vehicle telemetry.
+
+Clearly label them as estimates.
+
+Use configurable thresholds.
+
+Do not detect events while the app lacks sufficient sensor/GPS confidence.
+
+==================================================
+20. DRIVING SCORE
+==================================================
+
+Create a driving score from 0–100.
+
+Possible components:
+
+Speed discipline
+Smooth acceleration
+Smooth braking
+Cornering
+Consistency
+
+Example:
+
+91 / 100
+
+Excellent
+
+Breakdown:
+
+Speed discipline: 94
+Braking: 90
+Acceleration: 88
+Cornering: 92
+
+Make scoring transparent.
+
+Do not create a misleading score based on insufficient data.
+
+==================================================
+21. AI TRIP COACH
+==================================================
+
+This is one of the major differentiating features.
+
+After each trip, generate an AI analysis.
+
+Example:
+
+"Your driving was smooth overall. You had 2 speed-limit events and one hard-braking event."
+
+Then:
+
+WHAT YOU DID WELL
+
+- Smooth acceleration
+- Consistent speed
+
+WHAT TO IMPROVE
+
+- Reduce speeding events
+- Avoid late braking
+
+AI should use actual trip data.
+
+Never fabricate events.
+
+If AI API is unavailable:
+
+Use deterministic rule-based insights.
+
+Architecture must allow AI provider integration later.
+
+Create a provider abstraction.
+
+Do not hardcode the app to one AI vendor.
+
+==================================================
+22. FUEL TRACKING
+==================================================
+
+Vehicle settings:
+
+Fuel type
+Fuel efficiency
+Fuel price
+
+Support:
+
+₹/L
+$/L
+other currencies
+
+Calculate:
+
+Estimated fuel consumed
+Estimated fuel cost
+Cost per km
+Monthly fuel cost
+
+For EV:
+
+Support:
+
+Battery efficiency
+Cost per kWh
+
+Do not force fuel settings onto EV vehicles.
+
+==================================================
+23. VEHICLES
+==================================================
+
+VEHICLES screen.
+
+Allow multiple vehicles.
+
+Each vehicle:
+
+Name
+Type
+Fuel type
+Efficiency
+Fuel price
+Optional odometer
+
+Example:
+
+My Car
+
+Honda City
+
+Petrol
+
+17 km/L
+
+₹104/L
+
+Allow:
+
+Edit
+Delete
+Set default
+
+==================================================
+24. MAINTENANCE TRACKER
+==================================================
+
+Add optional maintenance tracking.
+
+Examples:
+
+Oil change
+Service
+Tyres
+Brake inspection
+Insurance
+PUC
+Other
+
+Each item:
+
+Name
+Due date
+Due distance
+Notes
+
+Show:
+
+UPCOMING
+
+Service due in 1,200 km
+
+Allow notifications.
+
+==================================================
+25. PARKING LOCATION
+==================================================
+
+Add:
+
+SAVE PARKING LOCATION
+
+When pressed:
+
+Save GPS location
+Save timestamp
+Save vehicle
+
+Show:
+
+"Parking location saved."
+
+On return:
+
+FIND MY CAR
+
+Show route/direction using available map capabilities.
+
+==================================================
+26. SOS
+==================================================
+
+Create an SOS feature.
+
+User can configure emergency contacts.
+
+SOS should require deliberate activation.
+
+Example:
+
+Press and hold for 3 seconds.
+
+Then show confirmation/countdown.
+
+When activated:
+
+Capture current location.
+
+Prepare emergency message.
+
+Allow user to send/share the location using platform-supported communication mechanisms.
+
+Do not automatically contact emergency services unless legally/platform supported and explicitly configured.
+
+Do not falsely claim that SOS guarantees emergency response.
+
+==================================================
+27. INSIGHTS SCREEN
+==================================================
+
+Create monthly/weekly analytics.
+
+Show:
+
+Total trips
+Total distance
+Driving time
+Average speed
+Maximum speed
+Fuel consumption
+Estimated fuel cost
+Average driving score
+Speeding events
+Hard braking events
+
+Charts:
+
+Distance
+Fuel cost
+Driving score
+Trips
+
+Use clean mobile charts.
+
+==================================================
+28. AI MONTHLY SUMMARY
+==================================================
+
+Example:
+
+"Your August driving summary"
+
+You drove:
+
+1,284 km
+
+26 hours
+
+38 trips
+
+Average score:
+
+88
+
+Then:
+
+Highlights
+Areas to improve
+Fuel efficiency trend
+
+Again:
+
+Never fabricate data.
+
+==================================================
+29. NOTIFICATIONS
+==================================================
+
+Optional notifications:
+
+Trip reminders
+Maintenance reminders
+Insurance/PUC reminders
+Speed warnings
+Trip summary ready
+
+Do not create excessive notifications.
+
+Allow notification categories to be disabled.
+
+==================================================
+30. SETTINGS
+==================================================
+
+Settings sections:
+
+Profile
+Units
+Speed alerts
+HUD
+Map
+Driving detection
+Notifications
+Privacy
+Data
+AI
+Subscription
+About
+
+Units:
+
+KM/H
+MPH
+Knots
+
+Currency:
+
+INR
+USD
+EUR
+etc.
+
+==================================================
+31. PRIVACY
+==================================================
+
+Driving/location data is sensitive.
+
+Implement privacy-first architecture.
+
+Explain:
+
+Why location is used
+When location is used
+Whether trips are stored locally
+Whether cloud sync is enabled
+Whether AI processing sends trip data externally
+
+Provide:
+
+Export data
+Delete trip data
+Delete account/data
+
+Do not collect unnecessary information.
+
+==================================================
+32. LOCAL-FIRST DATA
+==================================================
+
+Trip recording must not depend completely on internet access.
+
+The app should be able to:
+
+Start trip
+Track GPS
+Store trip locally
+End trip
+Show trip summary
+
+even if network connectivity temporarily disappears.
+
+Sync to backend when connectivity returns.
+
+==================================================
+33. BACKEND
+==================================================
+
+Create a clean backend architecture capable of supporting:
+
+Authentication
+User profiles
+Vehicles
+Trips
+Trip points
+Driving events
+Settings
+Subscriptions
+AI insights
+Maintenance reminders
+Cloud synchronization
+
+Use a proper database.
+
+Do not store huge GPS histories inefficiently.
+
+Use appropriate indexing.
+
+==================================================
+34. AUTHENTICATION
+==================================================
+
+Support:
+
+Email/password if needed
+Google login
+Apple login
+
+For iOS, Sign in with Apple must be considered if third-party login is offered.
+
+Allow guest/local mode if practical.
+
+Users should be able to use basic speedometer functionality without creating an account where possible.
+
+==================================================
+35. SUBSCRIPTION ARCHITECTURE
+==================================================
+
+Prepare monetization architecture but DO NOT hardcode pricing yet.
+
+Potential plans:
+
+FREE
+PRO
+
+Free:
+
+Basic speedometer
+Basic trip tracking
+Basic HUD
+
+Pro:
+
+Advanced trip history
+AI insights
+Fuel analytics
+Vehicle management
+Maintenance
+Advanced analytics
+Cloud sync
+Advanced safety features
+
+Make entitlements configurable.
+
+Do not build fake payment functionality.
+
+If RevenueCat or native App Store/Google Play billing is used, keep the billing layer modular.
+
+==================================================
+36. MAP PROVIDER
+==================================================
+
+Do not hardcode a map provider without checking licensing, API availability and cost.
+
+Create a MapProvider abstraction.
+
+Potential providers can be evaluated later.
+
+The code should make it possible to change providers without rewriting the application.
+
+==================================================
+37. GPS ARCHITECTURE
+==================================================
+
+Create a dedicated LocationService.
+
+Responsibilities:
+
+Start tracking
+Stop tracking
+Pause tracking
+Resume tracking
+Receive location updates
+Calculate speed
+Calculate distance
+Filter GPS noise
+Detect poor accuracy
+Persist location points
+Handle background tracking
+Handle permissions
+
+Do not put GPS logic directly inside UI components.
+
+==================================================
+38. SENSOR ARCHITECTURE
+==================================================
+
+Create a SensorService.
+
+Handle:
+
+Accelerometer
+Gyroscope
+Device motion
+
+Keep this separate from UI.
+
+If a sensor is unavailable:
+
+Gracefully degrade.
+
+==================================================
+39. BACKGROUND LOCATION
+==================================================
+
+This is critical.
+
+The application must correctly handle:
+
+Screen locked
+App backgrounded
+Phone locked
+Temporary GPS interruption
+
+Follow Apple and Android background location policies.
+
+Do not implement anything that attempts to bypass platform restrictions.
+
+Show appropriate permission explanations.
+
+Test actual background behavior on physical devices.
+
+==================================================
+40. BATTERY
+==================================================
+
+Driving apps can consume significant battery.
+
+Optimize:
+
+GPS frequency
+Sensor sampling
+Map updates
+Database writes
+Network sync
+
+Do not request maximum GPS accuracy continuously unless required.
+
+Create a sensible tracking strategy.
+
+==================================================
+41. UI DESIGN
+==================================================
+
+Create an original design.
+
+Do NOT reproduce the reference app's exact UI.
+
+Design language:
+
+Premium
+Modern
+Minimal
+Dark driving interface
+Large typography
+Rounded cards
+Subtle gradients where appropriate
+Clear icons
+High contrast
+Smooth transitions
+
+Primary driving screen:
+
+VERY LARGE SPEED NUMBER.
+
+Do not make speed tiny.
+
+Use a consistent design system.
+
+==================================================
+42. ACCESSIBILITY
+==================================================
+
+Support:
+
+Dynamic text where practical
+Large text
+High contrast
+Voice/audio alerts
+Haptic feedback
+Accessible touch targets
+
+Never rely solely on color.
+
+For example:
+
+Speeding should show:
+
+RED
++
+WARNING ICON
++
+TEXT
+
+==================================================
+43. LANDSCAPE MODE
+==================================================
+
+Support landscape driving mode.
+
+This is especially important for:
+
+HUD
+Dashboard
+Map
+
+Optimize layout separately for portrait and landscape.
+
+==================================================
+44. SAFETY
+==================================================
+
+The application must prioritize safe driving.
+
+Avoid interactions that encourage users to look at the screen while moving.
+
+If possible, provide:
+
+Voice alerts
+Audio feedback
+Minimal controls
+
+Do not encourage texting, gaming or manual interaction while driving.
+
+==================================================
+45. OFFLINE MODE
+==================================================
+
+Core speedometer must work without internet.
+
+Offline:
+
+GPS speed
+Distance
+Trip duration
+Trip recording
+Basic speed alerts
+Basic trip summary
+
+Online:
+
+Map tiles where available
+Cloud sync
+AI analysis
+Advanced speed-limit data
+Account features
+
+==================================================
+46. ERROR HANDLING
+==================================================
+
+Handle:
+
+No GPS
+Poor GPS
+Location permission denied
+Background location denied
+Sensor unavailable
+No network
+API failure
+Map failure
+AI failure
+Database failure
+
+Never crash because an optional service failed.
+
+Show friendly messages.
+
+==================================================
+47. PERFORMANCE
+==================================================
+
+Target:
+
+Fast launch
+Smooth 60 FPS UI where practical
+Low memory usage
+Low battery usage
+No unnecessary re-renders
+Efficient database operations
+
+Do not continuously write every GPS point to the backend.
+
+==================================================
+48. TESTING
+==================================================
+
+Create automated tests for:
+
+Speed calculation
+Distance calculation
+Unit conversion
+Trip duration
+Speed-limit threshold
+Driving score
+Fuel calculation
+Cost calculation
+Trip creation
+Trip pause/resume
+Trip completion
+GPS filtering
+
+Also test:
+
+No network
+Poor GPS
+Permission denial
+
+Create unit and integration tests.
+
+==================================================
+49. SECURITY
+==================================================
+
+Never expose:
+
+API keys
+Secrets
+Database credentials
+
+Use environment variables.
+
+Never commit:
+
+.env
+
+or secrets.
+
+Use secure authentication.
+
+Validate all backend input.
+
+==================================================
+50. PROJECT STRUCTURE
+==================================================
+
+Use a clean architecture similar to:
+
+src/
+
+components/
+screens/
+navigation/
+services/
+  location/
+  sensors/
+  maps/
+  ai/
+  notifications/
+  storage/
+  sync/
+  billing/
+models/
+repositories/
+utils/
+hooks/
+state/
+constants/
+theme/
+
+Keep business logic separate from UI.
+
+==================================================
+51. DATABASE MODEL
+==================================================
+
+At minimum design models for:
+
+User
+Vehicle
+Trip
+TripPoint
+DrivingEvent
+MaintenanceItem
+UserSettings
+EmergencyContact
+AIInsight
+Subscription
+
+Use appropriate relationships and indexes.
+
+Do not store duplicate data unnecessarily.
+
+==================================================
+52. DEVELOPMENT APPROACH
+==================================================
+
+DO NOT attempt to build everything blindly in one giant implementation.
+
+Build in stages.
+
+STAGE 1:
+
+Project setup
+Navigation
+Theme
+Onboarding
+Home
+Basic vehicle setup
+
+STAGE 2:
+
+GPS engine
+Speedometer
+Units
+Trip start/stop
+Distance
+Duration
+
+STAGE 3:
+
+Driving dashboard
+Map
+Combined mode
+HUD
+
+STAGE 4:
+
+Trip history
+Trip details
+Charts
+Driving events
+
+STAGE 5:
+
+Fuel
+Vehicle management
+Maintenance
+Parking
+
+STAGE 6:
+
+AI insights
+Driving score
+Analytics
+
+STAGE 7:
+
+Authentication
+Cloud sync
+Subscriptions
+
+STAGE 8:
+
+Production hardening
+Testing
+Performance
+Permissions
+Background tracking
+
+==================================================
+53. IMPORTANT DEVELOPMENT RULE
+==================================================
+
+Before implementing a feature, verify that the required iOS/Android API actually supports it.
+
+Do not create fake functionality.
+
+For example:
+
+If automatic speed-limit data requires a third-party API, create the provider interface and clearly mark the feature as requiring configuration.
+
+If CarPlay requires Apple approval/entitlements, do not pretend it is already supported.
+
+If Android Auto requires specific eligibility, follow the official requirements.
+
+==================================================
+54. ADMIN / CONFIGURATION
+==================================================
+
+Prepare configuration so the following can later be changed without rewriting the app:
+
+AI provider
+Map provider
+Speed-limit provider
+Subscription products
+Feature flags
+Analytics
+Notification settings
+
+Use environment variables/configuration.
+
+==================================================
+55. ANALYTICS
+==================================================
+
+Create privacy-conscious analytics architecture.
+
+Track only necessary product events such as:
+
+app_open
+drive_started
+drive_completed
+hud_opened
+trip_viewed
+subscription_started
+
+Do not collect unnecessary precise location analytics.
+
+==================================================
+56. FINAL UI QUALITY
+==================================================
+
+The finished app must NOT look like a developer prototype.
+
+Avoid:
+
+Default buttons
+Default React Native styling
+Crowded screens
+Tiny text
+Random colors
+Inconsistent spacing
+Placeholder-looking cards
+Unfinished screens
+
+Every screen must look production-ready.
+
+==================================================
+57. FIRST IMPLEMENTATION TASK
+==================================================
+
+Start by creating:
+
+1. Project architecture
+2. Design system
+3. Navigation
+4. Onboarding
+5. Home
+6. Vehicle setup
+7. Functional GPS engine
+8. Functional speedometer
+9. Start/stop trip
+10. Basic trip summary
+
+Then run tests.
+
+Do not move to advanced features until the core GPS/trip system is reliable.
+
+==================================================
+58. DELIVERABLE
+==================================================
+
+At the end of the implementation:
+
+- Application builds successfully
+- TypeScript has no errors
+- Tests pass
+- No secrets committed
+- iOS configuration is valid
+- Android configuration is valid
+- Permissions are correctly configured
+- README is included
+- Environment variables documented
+- Architecture documented
+- Known limitations documented
+
+Provide me with:
+
+1. What was implemented
+2. What remains
+3. How to run it
+4. How to test GPS functionality on a physical device
+5. Required API keys
+6. Required Apple configuration
+7. Required Google/Android configuration
+8. Any features requiring external services
+9. Any features that cannot be fully implemented until store/API approval
+
+IMPORTANT:
+Do not claim a feature is complete if it is only mocked.
+
+==================================================
+START NOW
+==================================================
+
+First inspect the existing repository/project.
+
+If this is an empty project, initialize the application using the architecture above.
+
+If an existing application exists, do NOT destroy working functionality. First inspect the existing code and adapt the architecture safely.
+
+Before making large destructive changes:
+
+- create a backup/branch if Git is available
+- inspect existing files
+- identify current framework
+- identify existing dependencies
+- identify existing environment variables
+- preserve working functionality
+
+Then implement STAGE 1 and STAGE 2 first.
+
+After implementation, run the available tests and build checks.
+
+Do not stop at a visual mockup.
+
+The GPS speedometer and trip tracking must be genuinely functional on a physical device.
